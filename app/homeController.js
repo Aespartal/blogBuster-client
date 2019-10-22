@@ -1,5 +1,5 @@
 var miControlador = miModulo.controller(
-    "homeController",
+    "homeController ", 
     ['$scope', '$http', function ($scope, $http) {
     }]
 )

@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <h1>FORMULARIO MULTIPLICACION</h1>
+      <h1>FORMULARIO SUMA</h1>
       <form name="userForm">
         <div class="form-group row">
           <label for="op1" class="col-sm-2 col-form-label">Primer operando</label>
@@ -43,12 +43,12 @@
         </div>
         <div class="form-group row">
           <div class="col-sm-10">
-            <button type="submit" ng-disabled="userForm.$invalid" class="btn btn-primary" ng-click="multiplica()">Enviar
+            <button type="submit" ng-disabled="userForm.$invalid" class="btn btn-primary" ng-click="suma()">Enviar
               datos</button>
           </div>
         </div>
       </form>
-      <h2 ng-show="resultado">El resultado de la multiplicación es {{resultado}}</h2>
+      <h2 ng-show="resultado">El resultado de la suma es {{resultado}}</h2>
       <a href="#!/">Ir a la página de inicio</a><br>
     </div>
   </div>
