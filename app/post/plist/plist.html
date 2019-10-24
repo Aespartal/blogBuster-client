@@ -1,0 +1,55 @@
+<div class="header shadow">
+  <h1>Registros</h1>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a class="nav-link" href="#!/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="#!/plist">Registros</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Link</a>
+        </li>
+      </ul>
+    </div>
+
+    <nav aria-label="Registros por página">
+      <ul class="pagination">
+        <li class="page-item" ng-class="{'active':(rppActual==10)}"><a class="page-link"
+            href="#!/post/plist/10/{{paginaActual}}">10</a></li>
+        <li class="page-item" ng-class="{'active':(rppActual==50)}"><a class="page-link"
+            href="#!/post/plist/50/{{paginaActual}}">50</a></li>
+        <li class="page-item" ng-class="{'active':(rppActual==100)}"><a class="page-link"
+            href="#!/post/plist/100/{{paginaActual}}">100</a></li>
+      </ul>
+    </nav>
+
+    <nav aria-label="Paginación">
+      <ul class="pagination">
+        <li class="page-item" ng-class="{'active':(paginaActual==p)}" ng-repeat="p in botonera">
+          <a class="page-link" href="#!/post/plist/{{rppActual}}/{{p}}">{{p}}</a>
+        </li>
+      </ul>
+    </nav>
+    <table class="table">
+      <tr>
+        <th>Id</th>
+        <th>Título</th>
+        <th>Cuerpo</th>
+        <th>Etiquetas</th>
+      </tr>
+      <tr ng-repeat="fila in pagina">
+        <td>{{fila.id}}</td>
+        <td>{{fila.titulo}}</td>
+        <td>{{fila.cuerpo}}</td>
+        <td>{{fila.etiquetas}}</td>
+      </tr>
+    </table>
+
+
+  </div>
+</div>

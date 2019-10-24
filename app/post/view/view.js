@@ -1,5 +1,5 @@
 var miControlador = miModulo.controller(
-    "editController",
+    "postViewController",
     ['$scope', '$http', 'miServicio01', function ($scope, $http, myService) {
   
     }]
