@@ -15,7 +15,7 @@
                     <a class="nav-link active" href="#!/post/new">Nuevo post</a>
                 </li>
             </ul>
-            <form name="postForm">
+            <form name="postForm" method="POST" ng-submit="new()">
                 <table class="table">
                     <tr>
                         <th>Título</th>
@@ -24,10 +24,10 @@
                                 ng-pattern="/^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/" id="validationr01"
                                 placeholder="Introduce el titulo" ng-required="true">
 
-                            <div class="invalid-feedback" ng-show="userForm.name.$error.required">
+                            <div class="invalid-feedback" ng-show="postForm.titulo.$error.required">
                                 El titulo no puede estar vacio.
                             </div>
-                            <div class="invalid-feedback" ng-show="userForm.name.$error.pattern">
+                            <div class="invalid-feedback" ng-show="postForm.titulo.$error.pattern">
                                 El titulo no puede contener numeros.
                             </div>
                         </td>
@@ -36,8 +36,7 @@
                         <th>Cuerpo</th>
                         <td><textarea class="form-control" ng-model="post.cuerpo" name="cuerpo"
                                 ng-class="{ 'is-invalid' : postForm.cuerpo.$invalid && !postForm.cuerpo.$pristine }"
-                                rows="10" ng-pattern="/^\d+$/" maxlength="100" id="validationr02"
-                                placeholder="Introduce cuerpo" ng-required="true">
+                                rows="5" maxlength="100" id="validationr02" ng-required="true">
                                 </textarea>
 
 
@@ -51,7 +50,7 @@
                                 placeholder="Introduce etiquetas" ng-required="true"></td>
                     </tr>
                 </table>
-                <button class="btn btn-primary" type="submit" ng-disabled="postForm.$invalid">Enviar</button>
+                <button class="btn btn-primary" ng-disabled="postForm.$invalid">Enviar</button>
             </form>
         </div>
     </div>
