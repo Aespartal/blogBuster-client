@@ -1,55 +1,58 @@
+<div class="header shadow">
+    <h1>Nuevo Post</h1>
+</div>
 <div class="container">
-  <div class="row">
-    <div class="col-md-12">
-      <h1>FORMULARIO SUMA</h1>
-      <form name="userForm">
-        <div class="form-group row">
-          <label for="op1" class="col-sm-2 col-form-label">Primer operando</label>
-          <div class="input-group">
-            <div class="col-sm-10">
-              <input type="text" ng-model="op1" class="form-control"
-                ng-class="{ 'is-invalid' : !userForm.op1.$valid && !userForm.op1.$pristine}" name="op1"
-                placeholder="Introduce operando 1" ng-pattern="/^\d+$/i" ng-maxlength="10" ng-required="true" />
-              <div class="invalid-feedback" ng-show="userForm.op1.$error.required">
-                El operando no puede estar vacío.
-              </div>
-              <div class="invalid-feedback" ng-show="userForm.op1.$error.pattern">
-                El operando introducido es incorrecto, sólo debe llevar números
-              </div>
-              <div class="invalid-feedback" ng-show="userForm.op1.$error.maxlength">
-                El operando introducido es incorrecto: la longitud máxima es de 10 números
-              </div>
-            </div>
-          </div>
+    <div class="row">
+        <div class="col">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link" href="#!/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#!/post/plist/10/1">Posts</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="#!/post/new">Nuevo post</a>
+                </li>
+            </ul>
+            <form name="postForm">
+                <table class="table">
+                    <tr>
+                        <th>Título</th>
+                        <td><input type="text" class="form-control" ng-model="post.titulo" name="titulo"
+                                ng-class="{ 'is-invalid' : postForm.titulo.$invalid && !postForm.titulo.$pristine }"
+                                ng-pattern="/^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/" id="validationr01"
+                                placeholder="Introduce el titulo" ng-required="true">
+
+                            <div class="invalid-feedback" ng-show="userForm.name.$error.required">
+                                El titulo no puede estar vacio.
+                            </div>
+                            <div class="invalid-feedback" ng-show="userForm.name.$error.pattern">
+                                El titulo no puede contener numeros.
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Cuerpo</th>
+                        <td><textarea class="form-control" ng-model="post.cuerpo" name="cuerpo"
+                                ng-class="{ 'is-invalid' : postForm.cuerpo.$invalid && !postForm.cuerpo.$pristine }"
+                                rows="10" ng-pattern="/^\d+$/" maxlength="100" id="validationr02"
+                                placeholder="Introduce cuerpo" ng-required="true">
+                                </textarea>
+
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Etiquetas</th>
+                        <td><input type="text" class="form-control" ng-model="post.etiquetas" name="etiquetas"
+                                ng-class="{ 'is-invalid' : postForm.etiquetas.$invalid && !postForm.etiquetas.$pristine }"
+                                ng-pattern="/^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/" id="validationr03"
+                                placeholder="Introduce etiquetas" ng-required="true"></td>
+                    </tr>
+                </table>
+                <button class="btn btn-primary" type="submit" ng-disabled="postForm.$invalid">Enviar</button>
+            </form>
         </div>
-        <div class="form-group row">
-          <label for="op2" class="col-sm-2 col-form-label">Segundo operando</label>
-          <div class="input-group">
-            <div class="col-sm-10">
-              <input type="text" ng-model="op2" class="form-control"
-                ng-class="{ 'is-invalid' : !userForm.op2.$valid && !userForm.op2.$pristine}" name="op2"
-                placeholder="Introduce operando 2" ng-pattern="/^\d+$/i" ng-maxlength="10" ng-required="true" />
-              <div class="invalid-feedback" ng-show="userForm.op2.$error.required">
-                El operando no puede estar vacío.
-              </div>
-              <div class="invalid-feedback" ng-show="userForm.op2.$error.pattern">
-                El operando introducido es incorrecto, sólo debe llevar números
-              </div>
-              <div class="invalid-feedback" ng-show="userForm.op2.$error.maxlength">
-                El operando introducido es incorrecto: la longitud máxima es de 10 números
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="form-group row">
-          <div class="col-sm-10">
-            <button type="submit" ng-disabled="userForm.$invalid" class="btn btn-primary" ng-click="suma()">Enviar
-              datos</button>
-          </div>
-        </div>
-      </form>
-      <h2 ng-show="resultado">El resultado de la suma es {{resultado}}</h2>
-      <a href="#!/">Ir a la página de inicio</a><br>
     </div>
-  </div>
 </div>

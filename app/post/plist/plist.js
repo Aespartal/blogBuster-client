@@ -30,29 +30,31 @@ var miControlador = miModulo.controller(
                 if (i == 1) {
                     $scope.botonera.push(i);
                 }
-
-
+                if (i == $scope.paginaActual && i-3> 1) {
+                    $scope.botonera.push("...");
+                }
+                if (i == $scope.paginaActual && i-2> 1) {
+                    $scope.botonera.push(i-2);
+                }
                 if (i == $scope.paginaActual && i-1> 1) {
-                    // $scope.botonera.push(0);
                     $scope.botonera.push(i-1);
                 }
-
                 if (i == $scope.paginaActual && i != 1) {
                     $scope.botonera.push(i);
                 }
                 if (i == $scope.paginaActual && i+1< $scope.numPaginas) {
                     $scope.botonera.push(i+1);
-                    // $scope.botonera.push(0);
                 }
-
+                if (i == $scope.paginaActual && i+2< $scope.numPaginas) {
+                    $scope.botonera.push(i+2);
+                }
+                if (i == $scope.paginaActual && i+3< $scope.numPaginas) {
+                    $scope.botonera.push("...");
+                }
                 if (i == $scope.numPaginas && i != 1 && i != $scope.paginaActual) {
                     $scope.botonera.push(i);
                 }
             }
         }
-
-
-
-
     }]
 )
