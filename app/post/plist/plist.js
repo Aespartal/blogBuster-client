@@ -3,6 +3,7 @@ var miControlador = miModulo.controller(
     ['$scope', '$http', '$routeParams', function ($scope, $http, $routeParams) {
         $scope.paginaActual = $routeParams.page;
         $scope.rppActual = $routeParams.rpp;
+        $scope.sitio = "plist";
 
         $http({
             method: 'GET',
