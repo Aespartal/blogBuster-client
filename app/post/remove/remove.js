@@ -16,7 +16,7 @@ var miControlador = miModulo.controller(
             url: 'http://localhost:8081/blogbuster/json?ob=post&op=remove&id='+ $routeParams.id
             }).then(function successCallback(response) {
                     alert('Registro eliminado correctamente.');
-                    $location.path("/");
+                    $location.path("/post/plists/10/1");
             }); 
         }
     }]

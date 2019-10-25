@@ -12,9 +12,15 @@ var miControlador = miModulo.controller(
 
         $scope.update = function(){
  
+            data = {
+                id:$routeParams.id,
+                titulo:$scope.post.titulo,
+                cuerpo:$scope.post.cuerpo,
+                etiquetas:$scope.post.etiquetas
+            }
             $http({
                 method: 'POST',
-                data: $scope.post,
+                data: data,
                 url: 'http://localhost:8081/blogbuster/json?ob=post&op=update'
 
             }).then(function (response) {
