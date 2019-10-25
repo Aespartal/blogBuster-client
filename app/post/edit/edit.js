@@ -1,6 +1,7 @@
 var miControlador = miModulo.controller(
     "postEditController",
     ['$scope', '$http', '$routeParams', function ($scope, $http, $routeParams) {
+
         $http({
             method: 'GET',
             url: 'http://localhost:8081/blogbuster/json?ob=post&op=get&id=' + $routeParams.id
