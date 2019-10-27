@@ -4,17 +4,9 @@
 <div class="container">
     <div class="row">
         <div class="col">
-            <ul class="nav nav-tabs">
-                <li class="nav-item">
-                    <a class="nav-link" href="#!/">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" href="#!/post/plist/10/1">Posts</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link " href="#!/post/new">Nuevo post</a>
-                </li>
-            </ul>
+            <div class="slide-animate-container">
+                <ng-include src="'app/nav.html'"></ng-include>
+            </div>
             <form name="postForm" method="POST" ng-submit="update()">
             <table class="table">
                 <tr>
@@ -24,7 +16,7 @@
                 </tr>
                 <tr>
                     <th>Título</th>
-                    <td><input type="text" class="form-control"  ng-value="traerpost.titulo" ng-model="post.titulo" name="titulo"
+                    <td><input type="text" class="form-control"  ng-value="traerpost.titulo" ng-model="titulo" name="titulo"
                         ng-class="{ 'is-invalid' : postForm.titulo.$invalid && !postForm.titulo.$pristine }"
                         ng-pattern="/^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/" id="validationr01"
                          ng-required="true" ></td>
@@ -39,20 +31,27 @@
                 </tr>
                 <tr>
                     <th>Cuerpo</th>
-                    <td><textarea class="form-control" ng-model="post.cuerpo" ng-value="traerpost.cuerpo" name="cuerpo"
+                    <td><textarea class="form-control" ng-model="cuerpo" ng-value="traerpost.cuerpo" name="cuerpo"
                         ng-class="{ 'is-invalid' : postForm.cuerpo.$invalid && !postForm.cuerpo.$pristine }"
                         rows="5" maxlength="255" id="validationr02" ng-required="true" >
                         </textarea></td>
                 </tr>
                 <tr>
                     <th>Etiquetas</th>
-                    <td><input type="text" class="form-control" ng-value="traerpost.etiquetas" ng-model="post.etiquetas" name="etiquetas"
+                    <td><input type="text" class="form-control" ng-value="traerpost.etiquetas" ng-model="etiquetas" name="etiquetas"
                         ng-class="{ 'is-invalid' : postForm.etiquetas.$invalid && !postForm.etiquetas.$pristine }"
                         ng-pattern="/^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/" id="validationr03"
                          ng-required="true" ></td>
                 </tr>
             </table>
-            <button class="btn btn-primary">Editar</button>
+            <div class="float-right">
+                <div class="my-3" ng-if="!hecho">¿Estas seguro?</div>
+                <div>
+                    <button type="button" class="btn btn-primary" ng-click="editar()" ng-if="!hecho">Guardar</button>
+                    <button type="button" class="btn btn-outline-warning" ng-click="reset()" ng-if="!hecho">Descartar</button>
+                    <button type="button" class="btn btn-outline-dark" ng-click="volver()">Volver</button>
+                </div>
+            </div>
         </form>
         </div>
     </div>
