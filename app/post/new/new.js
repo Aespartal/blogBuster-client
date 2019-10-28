@@ -1,15 +1,19 @@
 var miControlador = miModulo.controller(
-    "postNewController",
-    ['$scope', '$http', '$routeParams', function ($scope, $http, $routeParams) {
+    "postNuevoController",
+    ['$scope', '$http', function ($scope, $http) {
         $scope.sitio = "new";
-        $scope.new = function(data) {
-            data = {data:$scope.post}
-            $http.post("http://localhost:8081/blogbuster/json?ob=post&op=insert", data)
+
+        $scope.new = function() {
+            var jsonToSend = {data: JSON.stringify($scope.post)};
+            $http.post("http://localhost:8081/blogbuster/json?ob=post&op=insert", {params: jsonToSend})
          .then(function successCallback(response) {
-             $scope.status = response.data.status;
-            alert($scope.status);
-         }, function errorCallback(response) {
-            alert("No funciona");
+            if (response.data.status == 500) {
+                $scope.fallido = true;
+            }
+            $scope.hecho = true;
+         }, function errorCallback(error) {
+            $scope.fallido = true;
+            $scope.hecho = true;
          })
         }    
     }]

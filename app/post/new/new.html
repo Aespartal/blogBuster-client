@@ -4,12 +4,12 @@
 <div class="container">
     <div class="row">
         <div class="col">
-            <ng-include src="'app/navegador.html'"></ng-include>
+            <ng-include src="'app/nav.html'"></ng-include>
             <form name="postForm" method="POST" ng-submit="new()">
                 <table class="table">
                     <tr>
                         <th>Título</th>
-                        <td><input type="text" class="form-control" ng-model="post.titulo" name="titulo"
+                        <td><input type="text" class="form-control" ng-model="titulo" name="titulo"
                                 ng-class="{ 'is-invalid' : postForm.titulo.$invalid && !postForm.titulo.$pristine }"
                                 ng-pattern="/^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/" id="validationr01"
                                 placeholder="Introduce el titulo" ng-required="true">
@@ -24,7 +24,7 @@
                     </tr>
                     <tr>
                         <th>Cuerpo</th>
-                        <td><textarea class="form-control" ng-model="post.cuerpo" name="cuerpo"
+                        <td><textarea class="form-control" ng-model="cuerpo" name="cuerpo"
                                 ng-class="{ 'is-invalid' : postForm.cuerpo.$invalid && !postForm.cuerpo.$pristine }"
                                 rows="5" maxlength="100" id="validationr02" ng-required="true">
                                 </textarea>
@@ -34,7 +34,7 @@
                     </tr>
                     <tr>
                         <th>Etiquetas</th>
-                        <td><input type="text" class="form-control" ng-model="post.etiquetas" name="etiquetas"
+                        <td><input type="text" class="form-control" ng-model="etiquetas" name="etiquetas"
                                 ng-class="{ 'is-invalid' : postForm.etiquetas.$invalid && !postForm.etiquetas.$pristine }"
                                 ng-pattern="/^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/" id="validationr03"
                                 placeholder="Introduce etiquetas" ng-required="true"></td>

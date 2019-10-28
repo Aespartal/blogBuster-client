@@ -12,25 +12,47 @@ var miControlador = miModulo.controller(
         })
 
         $scope.update = function(){
- 
+
             data = {
-                id:$routeParams.id,
-                titulo:$scope.post.titulo,
-                cuerpo:$scope.post.cuerpo,
-                etiquetas:$scope.post.etiquetas
+                id: $routeParams.id,
+                titulo: $scope.titulo,
+                cuerpo: $scope.cuerpo,
+                etiquetas: $scope.etiquetas
             }
+            var jsonToSend = {data: JSON.stringify(data)};
+            $http.defaults.headers.put['Content-Type'] = 'application/json;charset=utf-8';
+            $http.get('http://localhost:8081/blogbuster/json?ob=post&op=update', {params: jsonToSend})
+            .then(function (response) {
+                if (response.data.status == 500) {
+                    $scope.fallido = true;
+                }
+                $scope.hecho = true;
+            }, function (error) {
+                $scope.fallido = true;
+                $scope.hecho = true;
+            });
+        };
+
+        $scope.volver = function () {
+            window.history.back();
+        };
+
+        $scope.reset = function() {
             $http({
                 method: 'POST',
-                data: data,
-                url: 'http://localhost:8081/blogbuster/json?ob=post&op=update'
-
+                url: `http://localhost:8081/blogbuster/json?ob=post&op=get&id=${$routeParams.id}`
             }).then(function (response) {
-                $scope.status = response.data.status;
-                $scope.traerpost = response.data.response;
+                const respuesta = response.data.response;
+                $scope.titulo = respuesta.titulo;
+                $scope.cuerpo = respuesta.cuerpo;
+                $scope.etiquetas = respuesta.etiquetas;
+                $scope.fecha = respuesta.fecha;
             }, function () {
-            })
+
+            });
         }
 
+        $scope.reset();
 
     }]
 
