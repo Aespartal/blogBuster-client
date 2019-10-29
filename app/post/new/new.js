@@ -1,19 +1,21 @@
 var miControlador = miModulo.controller(
     "postNuevoController",
-    ['$scope', '$http', function ($scope, $http) {
+    ['$scope', '$http','promisesServices', function ($scope, $http, promisesServices) {
         $scope.sitio = "new";
 
         $scope.new = function() {
             var jsonToSend = {data: JSON.stringify($scope.post)};
-            $http.post("http://localhost:8081/blogbuster/json?ob=post&op=insert", {params: jsonToSend})
+            $http.defaults.headers.put['Content-Type'] = 'application/json;charset=utf-8';
+            promisesServices.ajaxNew('post',{params: jsonToSend})
          .then(function successCallback(response) {
-            if (response.data.status == 500) {
+            if (response.data.status != 200) {
                 $scope.fallido = true;
             }
             $scope.hecho = true;
          }, function errorCallback(error) {
             $scope.fallido = true;
             $scope.hecho = true;
+
          })
         }    
     }]

@@ -1,6 +1,6 @@
 var miControlador = miModulo.controller(
     "postPlistController",
-    ['$scope', '$http', '$routeParams', '$window', function ($scope, $http, $routeParams, $window) {
+    ['$scope', '$routeParams', '$window','servicesPromises', function ($scope, $routeParams, $window,servicesPromises) {
         $scope.paginaActual = parseInt($routeParams.page);
         $scope.rppActual = parseInt($routeParams.rpp);
         $scope.rppS = [10, 50, 100];
@@ -8,19 +8,15 @@ var miControlador = miModulo.controller(
         $scope.campo = $routeParams.order;
         $scope.direction = $routeParams.direction;
 
-        $http({
-            method: 'GET',
-            url: 'http://localhost:8081/blogbuster/json?ob=post&op=getpage&rpp=' + $routeParams.rpp + '&page=' + $routeParams.page
-        }).then(function (response) {
+        servicesPromises.ajaxGetPage('post',$scope.rppActual,$scope.paginaActual)
+        .then(function (response) {
             $scope.status = response.data.status;
             $scope.pagina = response.data.response;
         }, function () {
         })
 
-        $http({
-            method: 'GET',
-            url: 'http://localhost:8081/blogbuster/json?ob=post&op=getcount'
-        }).then(function (response) {
+        servicesPromises.ajaxGetCount('post')
+        .then(function (response) {
             $scope.status = response.data.status;
             $scope.numRegistros = response.data.response;
             $scope.numPaginas = Math.ceil($scope.numRegistros / $routeParams.rpp);
