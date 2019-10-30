@@ -1,28 +1,28 @@
+<div class="slide-animate-container">
+  <ng-include src="'app/nav.html'"></ng-include>
+</div>
 <div class="header shadow">
   <h1>Bienvenido a mi SuperBlog!</h1>
 </div>
 <div class="container">
-<div class="row">
-  <div class="col-md-12">
-    <div class="slide-animate-container">
-      <ng-include src="'app/nav.html'"></ng-include>
-    </div>
-    <div ng-repeat="fila in pagina">
-      <h2>{{fila.titulo}}</h2>
-      <p>{{fila.cuerpo}}</p>
-      <p>{{fila.etiquetas}}</p>
-    </div>
-    <nav aria-label="Paginación">
-      <ul class="pagination">
+  <div class="row">
+    <div class="col-md-12">
+      <div ng-repeat="fila in pagina">
+        <h2>{{fila.titulo}}</h2>
+        <p>{{fila.cuerpo}}</p>
+        <p>{{fila.etiquetas}}</p>
+      </div>
+      <nav aria-label="Paginación">
+        <ul class="pagination">
           <li class="page-item" ng-class="{'active':(paginaActual==p)}" ng-disabled="p == '...'"
-          ng-repeat="p in botonera track by $index">
-          <a class="page-link" ng-if="p != '...'" href="#!/{{ rppActual }}/{{ p }}">{{p}}</a>
-          <span class="page-link" ng-if="p == '...'">{{ p }}</span>
-        </li>
-      </ul>
-  </nav>
+            ng-repeat="p in botonera track by $index">
+            <a class="page-link" ng-if="p != '...'" href="#!/{{ rppActual }}/{{ p }}">{{p}}</a>
+            <span class="page-link" ng-if="p == '...'">{{ p }}</span>
+          </li>
+        </ul>
+      </nav>
 
-  
+
+    </div>
   </div>
-</div>
 </div>

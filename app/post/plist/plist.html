@@ -1,10 +1,12 @@
+<div class="slide-animate-container">
+    <ng-include src="'app/nav.html'"></ng-include>
+</div>
 <div class="header shadow">
     <h1>Lista de posts</h1>
 </div>
 <div class="container">
     <div class="row">
         <div class="col">
-            <ng-include src="'app/nav.html'"></ng-include>
             <div class="wrapper">
                 <nav aria-label="Registros por página">
                     <ul class="pagination float-right">
@@ -16,10 +18,11 @@
                 <nav aria-label="Paginación">
                     <ul class="pagination">
                         <li class="page-item" ng-class="{'active':(paginaActual==p)}" ng-disabled="p == '...'"
-                        ng-repeat="p in botonera track by $index">
-                        <a class="page-link" ng-if="p != '...'" href="#!/post/plist/{{ rppActual }}/{{ p }}">{{p}}</a>
-                        <span class="page-link" ng-if="p == '...'">{{ p }}</span>
-                      </li>
+                            ng-repeat="p in botonera track by $index">
+                            <a class="page-link" ng-if="p != '...'"
+                                href="#!/post/plist/{{ rppActual }}/{{ p }}">{{p}}</a>
+                            <span class="page-link" ng-if="p == '...'">{{ p }}</span>
+                        </li>
                     </ul>
                 </nav>
                 <table class="table">
@@ -46,10 +49,11 @@
                 <nav aria-label="Paginación">
                     <ul class="pagination">
                         <li class="page-item" ng-class="{'active':(paginaActual==p)}" ng-disabled="p == '...'"
-                        ng-repeat="p in botonera track by $index">
-                        <a class="page-link" ng-if="p != '...'" href="#!/post/plist/{{ rppActual }}/{{ p }}">{{p}}</a>
-                        <span class="page-link" ng-if="p == '...'">{{ p }}</span>
-                      </li>
+                            ng-repeat="p in botonera track by $index">
+                            <a class="page-link" ng-if="p != '...'"
+                                href="#!/post/plist/{{ rppActual }}/{{ p }}">{{p}}</a>
+                            <span class="page-link" ng-if="p == '...'">{{ p }}</span>
+                        </li>
                     </ul>
                 </nav>
             </div>

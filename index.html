@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es" ng-app="BlogBusterApp">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,24 +8,30 @@
   <title>Prueba inicial de AngularJS</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/v4-shims.css">
-
-    <link rel="stylesheet" href="app/css/style.css">
+  <link rel="stylesheet" href="css/log.css">
+  <link rel="stylesheet" href="css/style.css">
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.8/angular-route.js"></script>
   <script src="config/module.js"></script>
   <script src="config/config.js"></script>
   <script src="config/routes.js"></script>
-  <script src="config/services.js"></script>
+  <script src="config/promisesServices.js"></script>
   <script src="app/blog.js"></script>
   <script src="app/post/plist/plist.js"></script>
   <script src="app/post/view/view.js"></script>
   <script src="app/post/remove/remove.js"></script>
   <script src="app/post/new/new.js"></script>
   <script src="app/post/edit/edit.js"></script>
+  <script src="app/usuario/login/login.js"></script>
+  <script src="app/usuario/logout/logout.js"></script>
 </head>
+
 <body>
   <div ng-view></div>
+
+  <ng-include src="'app/footer.html'"></ng-include>
 </body>
+
 </html>

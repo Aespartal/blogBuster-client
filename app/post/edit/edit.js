@@ -1,6 +1,6 @@
 var miControlador = miModulo.controller(
     "postEditController",
-    ['$scope', '$http', '$routeParams', 'promisesService', function ($scope, $http, $routeParams, promisesServices) {
+    ['$scope', '$http', '$routeParams', 'promisesServices', function ($scope, $http, $routeParams, promisesServices) {
 
 
         $scope.falloMensaje = "";

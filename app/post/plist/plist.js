@@ -1,6 +1,6 @@
 var miControlador = miModulo.controller(
     "postPlistController",
-    ['$scope', '$routeParams', '$window','servicesPromises', function ($scope, $routeParams, $window,servicesPromises) {
+    ['$scope', '$routeParams', '$window','promisesServices', function ($scope, $routeParams, $window,promisesServices) {
         $scope.paginaActual = parseInt($routeParams.page);
         $scope.rppActual = parseInt($routeParams.rpp);
         $scope.rppS = [10, 50, 100];
@@ -8,14 +8,14 @@ var miControlador = miModulo.controller(
         $scope.campo = $routeParams.order;
         $scope.direction = $routeParams.direction;
 
-        servicesPromises.ajaxGetPage('post',$scope.rppActual,$scope.paginaActual)
+        promisesServices.ajaxGetPage('post',$scope.rppActual,$scope.paginaActual)
         .then(function (response) {
             $scope.status = response.data.status;
             $scope.pagina = response.data.response;
         }, function () {
         })
 
-        servicesPromises.ajaxGetCount('post')
+        promisesServices.ajaxGetCount('post')
         .then(function (response) {
             $scope.status = response.data.status;
             $scope.numRegistros = response.data.response;

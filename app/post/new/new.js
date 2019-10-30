@@ -1,5 +1,5 @@
 var miControlador = miModulo.controller(
-    "postNuevoController",
+    "postNewController",
     ['$scope', '$http','promisesServices', function ($scope, $http, promisesServices) {
         $scope.sitio = "new";
 
