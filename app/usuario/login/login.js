@@ -1,7 +1,7 @@
 var miControlador = miModulo.controller(
-    "loginController",
+    "usuarioLoginController",
     ['$scope', '$http', '$routeParams', '$window', function ($scope, $http, $routeParams, $window) {
-        $scope.controller="loginController";
+        $scope.controller="usuarioLoginController";
 
         
     }]
