@@ -1,24 +1,21 @@
 var miControlador = miModulo.controller(
     "blogController",
-    ['$scope', '$http', '$routeParams', '$window', function ($scope, $http, $routeParams, $window) {
+    ['$scope', '$routeParams', '$window','promisesServices', function ($scope, $routeParams, $window,promisesServices) {
         $scope.paginaActual = parseInt($routeParams.page);
         $scope.rppActual = 10;
         $scope.sitio = "blog";
         $scope.campo = $routeParams.order;
         $scope.direction = $routeParams.direction;
-        $http({
-            method: 'GET',
-            url: 'http://localhost:8081/blogbuster/json?ob=post&op=getpage&rpp=' + $routeParams.rpp + '&page=' + $routeParams.page
-        }).then(function (response) {
+
+        promisesServices.ajaxGetPage('post',$scope.rppActual,$scope.paginaActual)
+        .then(function (response) {
             $scope.status = response.data.status;
             $scope.pagina = response.data.response;
         }, function () {
         })
 
-        $http({
-            method: 'GET',
-            url: 'http://localhost:8081/blogbuster/json?ob=post&op=getcount'
-        }).then(function (response) {
+        promisesServices.ajaxGetCount('post')
+        .then(function (response) {
             $scope.status = response.data.status;
             $scope.numRegistros = response.data.response;
             $scope.numPaginas = Math.ceil($scope.numRegistros / $scope.rppActual);
