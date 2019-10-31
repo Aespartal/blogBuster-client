@@ -7,18 +7,18 @@
     <a class="navbar-brand" href="#">blogBuster</a>
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
       <li class="nav-item">
-        <a class="nav-link" ng-class="{'active': sitio=='blog'}" href="#!/10/1">Blog</a>
+        <a class="nav-link" ng-class="{'active': controller=='blogController'}" href="#!/10/1">Blog</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" ng-class="{'active': sitio=='plist'}" href="#!/post/plist/10/1">Posts</a>
+        <a class="nav-link" ng-class="{'active': controller=='postPlistController'}" href="#!/post/plist/10/1">Posts</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" ng-class="{'active': sitio=='new'}" href="#!/post/new">Nuevo post</a>
+        <a class="nav-link" ng-class="{'active': controller=='postNewController'}" href="#!/post/new">Nuevo post</a>
       </li>
     </ul>
     <form class="form-inline nav-item">
-      <a class="nav-link" ng-class="{'active': sitio=='login'}" href="#!/login">Iniciar Sesión <i class="fas fa-sign-in-alt"></i></a>
-      <a class="nav-link" ng-class="{'active': sitio=='logout'}" href="#!/logout">Cerrar Sesión <i class="fas fa-sign-out-alt"></i></a>
+      <a class="nav-link" ng-class="{'active': controller=='loginController'}" href="#!/login">Iniciar Sesión <i class="fas fa-sign-in-alt"></i></a>
+      <a class="nav-link" ng-class="{'active': controller=='logoutController'}" href="#!/logout">Cerrar Sesión <i class="fas fa-sign-out-alt"></i></a>
     </form>
   </div>
 </nav>

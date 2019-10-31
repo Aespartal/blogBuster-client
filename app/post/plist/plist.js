@@ -4,7 +4,7 @@ var miControlador = miModulo.controller(
         $scope.paginaActual = parseInt($routeParams.page);
         $scope.rppActual = parseInt($routeParams.rpp);
         $scope.rppS = [10, 50, 100];
-        $scope.sitio = "plist";
+        $scope.controller = "postPlistController";
         $scope.campo = $routeParams.order;
         $scope.direction = $routeParams.direction;
 

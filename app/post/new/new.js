@@ -1,7 +1,7 @@
 var miControlador = miModulo.controller(
     "postNewController",
     ['$scope', '$http','promisesServices', function ($scope, $http, promisesServices) {
-        $scope.sitio = "new";
+        $scope.controller = "postNewController";
 
         $scope.new = function() {
             var jsonToSend = {data: JSON.stringify($scope.post)};

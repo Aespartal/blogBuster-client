@@ -3,7 +3,7 @@ var miControlador = miModulo.controller(
     ['$scope', '$routeParams', '$window','promisesServices', function ($scope, $routeParams, $window,promisesServices) {
         $scope.paginaActual = parseInt($routeParams.page);
         $scope.rppActual = 10;
-        $scope.sitio = "blog";
+        $scope.controller = "blogController";
         $scope.campo = $routeParams.order;
         $scope.direction = $routeParams.direction;
 
