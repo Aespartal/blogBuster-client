@@ -8,11 +8,7 @@ var authPromise = function (sessionService) {
 
 miModulo.config(['$routeProvider',
     function ($routeProvider) {
-        $routeProvider.when('/', {
-            templateUrl: 'app/homeTemplate.html',
-            controller: 'homeController',
-            resolve: { auth: anyPromise }
-        })
+       
         $routeProvider.when('/post/plist/:rpp/:page', {
             templateUrl: 'app/post/plist/plist.html',
             controller: 'postPlistController',
@@ -55,6 +51,6 @@ miModulo.config(['$routeProvider',
             css: 'app/usuario/logout/logout.css',
             resolve: { auth: authPromise }
         });
-        $routeProvider.otherwise({ redirectTo: '/' })
+        $routeProvider.otherwise({ redirectTo: '/home/10/1' })
 
     }])
