@@ -1,38 +1,60 @@
 var miControlador = miModulo.controller(
     "postEditController",
-    ['$scope', '$http', '$routeParams', 'promisesServices', function ($scope, $http, $routeParams, promisesServices) {
-
-
+    ['$scope', '$http', '$routeParams', 'promesasService', function ($scope, $http, $routeParams, promesasService) {
+        $scope.id = $routeParams.id;
+        $scope.controller = "postEditController";
+        $scope.fallo = false;
+        $scope.hecho = false;
         $scope.falloMensaje = "";
 
-        promisesServices.ajaxGet('post', $routeParams.id)
+         promesasService.ajaxCheck()
+         .then(function (response) {
+             if(response.data.status==200){
+                 $scope.session= true;
+                 $scope.usuario=response.data.message;
+             } else {
+                 $scope.session= false;
+             }
+         }, function (response) {
+             $scope.session= false;
+         })
+
+        promesasService.ajaxGet('post', $routeParams.id)
             .then(function (response) {
-                $scope.status = response.data.status;
-                $scope.traerpost = response.data.response;
+                $scope.id = response.data.message.id;
+                $scope.titulo = response.data.message.titulo;
+                $scope.cuerpo = response.data.message.cuerpo;
+                $scope.etiquetas = response.data.message.etiquetas;
             }, function () {
+                $scope.fallo = true;
             })
 
-        $scope.update = function () {
+        $scope.modificar = function () {
 
-            data = {
+            const datos = {
                 id: $routeParams.id,
                 titulo: $scope.titulo,
                 cuerpo: $scope.cuerpo,
                 etiquetas: $scope.etiquetas
             }
-            var jsonToSend = { data: JSON.stringify(data) };
+            var jsonToSend = {
+                data: JSON.stringify(datos)
+            };
 
             $http.defaults.headers.put['Content-Type'] = 'application/json;charset=utf-8';
-            promisesServices.ajaxUpdate('post', { params: jsonToSend })
+            promesasService.ajaxUpdate('post', { params: jsonToSend })
                 .then(function (response) {
                     if (response.data.status != 200) {
-                        $scope.fallido = true;
+                        $scope.fallo = true;
+                        $scope.falloMensaje = response.data.message;
+                    } else {
+                        $scope.fallo = false;
+                        $scope.hecho=true;
                     }
-                    $scope.hecho = true;
                 }, function (error) {
-                    $scope.fallido = true;
                     $scope.hecho = true;
-                    $scope.falloMensaje = response.data.response;
+                    $scope.fallo = true;
+                    $scope.falloMensaje = error.message + " " + error.stack;
                 });
         };
 
@@ -41,9 +63,9 @@ var miControlador = miModulo.controller(
         };
 
         $scope.reset = function () {
-            promisesServices.ajaxGet('post', $routeParams.id)
+            promesasService.ajaxGet('post', $routeParams.id)
                 .then(function (response) {
-                    const respuesta = response.data.response;
+                    const respuesta = response.data.message;
                     $scope.titulo = respuesta.titulo;
                     $scope.cuerpo = respuesta.cuerpo;
                     $scope.etiquetas = respuesta.etiquetas;
@@ -52,6 +74,10 @@ var miControlador = miModulo.controller(
 
                 });
         }
+
+        $scope.cerrar = function () {
+            $location.path('/home/10/1');
+        };
 
         $scope.reset();
 

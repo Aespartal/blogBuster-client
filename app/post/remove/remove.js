@@ -1,27 +1,58 @@
 var miControlador = miModulo.controller(
     "postRemoveController",
-    ['$scope', '$routeParams','$location','promisesServices', function ($scope, $routeParams, $location,promisesServices) {
-        
-        $scope.hecho=false;
-        $scope.fallo=false;
+    ['$scope', '$routeParams', '$location', 'promesasService', function ($scope, $routeParams, $location, promesasService) {
 
-        promisesServices.ajaxGet('post',$routeParams.id)
-        .then(function (response) {
-            $scope.status = response.data.status;
-            $scope.traerpost = response.data.response;
-        }, function () {
-        })
+        $scope.id = $routeParams.id;
+        $scope.controller = "postEditController";
+        $scope.fallo = false;
+        $scope.hecho = false;
+        $scope.falloMensaje = "";
 
-        $scope.remove = function(){
-            promisesServices.ajaxRemove('post', $routeParams.id)
+          promesasService.ajaxCheck()
+          .then(function (response) {
+              if(response.data.status==200){
+                  $scope.session= true;
+                  $scope.usuario=response.data.message;
+              } else {
+                  $scope.session= false;
+              }
+          }, function (response) {
+              $scope.session= false;
+          })
+
+          promesasService.ajaxGet('post', $routeParams.id)
+          .then(function (response) {
+              $scope.id = response.data.message.id;
+              $scope.titulo = response.data.message.titulo;
+              $scope.cuerpo = response.data.message.cuerpo;
+              $scope.etiquetas = response.data.message.etiquetas;
+          }, function () {
+              $scope.fallo = true;
+          })
+
+        $scope.remove = function () {
+
+            promesasService.ajaxRemove('post', $routeParams.id)
             .then(function (response) {
-                    alert('Registro eliminado correctamente.');
-                    $location.path("/post/plists/10/1");
+                if (response.data.status != 200) {
+                    $scope.fallo = true;
+                    $scope.falloMensaje = response.data.message;
+                } else {
+                    $scope.fallo = false;
                     $scope.hecho=true;
-            }, function () {
-                $scope.fallo=true;
-                $scope.falloMensaje = response.data.response;
-            }); 
+                }
+            }, function (error) {
+                $scope.hecho = true;
+                $scope.fallo = true;
+                $scope.falloMensaje = error.message + " " + error.stack;
+            });
         }
+        $scope.volver = function () {
+            window.history.back();
+        };
+
+        $scope.cerrar = function () {
+            $location.path('/home/10/1');
+        };
     }]
 )

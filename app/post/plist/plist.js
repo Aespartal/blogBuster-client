@@ -1,37 +1,44 @@
 var miControlador = miModulo.controller(
     "postPlistController",
-    ['$scope', '$http', '$routeParams', function ($scope, $http, $routeParams) {
+    ['$scope', '$http', '$routeParams', 'promesasService', function ($scope, $http, $routeParams, promesasService) {
         $scope.paginaActual = parseInt($routeParams.page);
         $scope.rppActual = parseInt($routeParams.rpp);
-        $scope.rppS = [10,50,100];
+        $scope.rppS = [10, 50, 100];
         $scope.controller = "postPlistController";
 
+         promesasService.ajaxCheck()
+         .then(function (response) {
+             if(response.data.status=="200"){
+                 $scope.session= true;
+                 $scope.usuario=response.data.message;
+             } else {
+                 $scope.session= false;
+             }
+         }, function (response) {
+             $scope.session= false;
+         })
 
-        $http({
-            method: 'POST',
-            url: 'http://localhost:8081/blogbuster/json?ob=post&op=getpage&rpp=' + $routeParams.rpp + '&page=' + $routeParams.page
-        }).then(function (response) {
-            $scope.status = response.data.status;
-            $scope.pagina = response.data.response;
-        }, function () {
-        })
+        promesasService.ajaxGetPage('post', $scope.rppActual, $scope.paginaActual)
+            .then(function (response) {
+                $scope.status = response.data.status;
+                $scope.pagina = response.data.message;
+            }, function () {
+            })
 
-        $http({
-            method: 'POST',
-            url: 'http://localhost:8081/blogbuster/json?ob=post&op=getcount'
-        }).then(function (response) {
-            $scope.status = response.data.status;
-            $scope.numRegistros = response.data.response;
-            $scope.numPaginas = Math.ceil($scope.numRegistros / $routeParams.rpp);
-            $scope.calcPage = [];
-            for (const p of $scope.rppS) {
-                const res = $scope.paginaActual/$scope.numPaginas;
-                const next = Math.ceil($scope.numRegistros / p);
-                $scope.calcPage.push(Math.round(res * next));
-            }
-            paginacion(2);
-        }, function () {
-        })
+        promesasService.ajaxGetCount('post')
+            .then(function (response) {
+                $scope.status = response.data.status;
+                $scope.numRegistros = response.data.message;
+                $scope.numPaginas = Math.ceil($scope.numRegistros / $routeParams.rpp);
+                $scope.calcPage = [];
+                for (const p of $scope.rppS) {
+                    const res = $scope.paginaActual / $scope.numPaginas;
+                    const next = Math.ceil($scope.numRegistros / p);
+                    $scope.calcPage.push(Math.round(res * next));
+                }
+                paginacion(2);
+            }, function () {
+            })
 
         function paginacion(vecindad) {
             vecindad++;
@@ -43,7 +50,7 @@ var miControlador = miModulo.controller(
                     $scope.botonera.push(i);
                 } else if (i == $scope.numPaginas) {
                     $scope.botonera.push(i);
-                } else if (i == ($scope.paginaActual - vecindad) || i == ($scope.paginaActual + vecindad)){
+                } else if (i == ($scope.paginaActual - vecindad) || i == ($scope.paginaActual + vecindad)) {
                     $scope.botonera.push('...');
                 }
             }

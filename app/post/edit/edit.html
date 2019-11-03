@@ -1,63 +1,85 @@
 <div class="slide-animate-container">
-    <ng-include src="'app/nav.html'"></ng-include>
-</div>
+        <ng-include src="'app/menu.html'"></ng-include>
+      </div>
 <div class="header shadow">
-    <h1>Editar Post</h1>
+    <h1><span class="font-weight-bold">Editar post</span></h1>
 </div>
 <div class="container">
     <div class="row">
         <div class="col">
-
-            <form name="postForm">
-                <table class="table">
-                    <tr>
-                        <th>Id</th>
-                        <td>{{traerpost.id}}</td>
-
-                    </tr>
-                    <tr>
-                        <th>Título</th>
-                        <td><input type="text" class="form-control" ng-value="traerpost.titulo" ng-model="titulo"
-                                name="titulo"
-                                ng-class="{ 'is-invalid' : postForm.titulo.$invalid && !postForm.titulo.$pristine }"
-                                ng-pattern="/^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/" id="validationr01"
-                                ng-required="true"></td>
-
-                        <div class="invalid-feedback" ng-show="postForm.titulo.$error.required">
-                            El titulo no puede estar vacio.
-                        </div>
-                        <div class="invalid-feedback" ng-show="postForm.titulo.$error.pattern">
-                            El titulo no puede contener numeros.
-                        </div>
-
-                    </tr>
-                    <tr>
-                        <th>Cuerpo</th>
-                        <td><textarea class="form-control" ng-model="cuerpo" ng-value="traerpost.cuerpo" name="cuerpo"
-                                ng-class="{ 'is-invalid' : postForm.cuerpo.$invalid && !postForm.cuerpo.$pristine }"
-                                rows="5" maxlength="255" id="validationr02" ng-required="true">
-                        </textarea></td>
-                    </tr>
-                    <tr>
-                        <th>Etiquetas</th>
-                        <td><input type="text" class="form-control" ng-value="traerpost.etiquetas" ng-model="etiquetas"
-                                name="etiquetas"
-                                ng-class="{ 'is-invalid' : postForm.etiquetas.$invalid && !postForm.etiquetas.$pristine }"
-                                ng-pattern="/^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/" id="validationr03"
-                                ng-required="true"></td>
-                    </tr>
-                </table>
-                <div class="float-right">
-                    <div class="my-3" ng-if="!hecho">¿Estas seguro?</div>
-                    <div>
-                        <button type="button" class="btn btn-primary" ng-click="update()"
-                            ng-if="!hecho">Guardar</button>
-                        <button type="button" class="btn btn-outline-warning" ng-click="reset()"
-                            ng-if="!hecho">Descartar</button>
-                        <button type="button" class="btn btn-outline-dark" ng-click="volver()">Volver</button>
+            <form name="userForm" ng-show="!fallo&&!hecho">
+                <div class="form-group row">
+                    <label for="titulo" class="col-sm-2 col-form-label">Id:</label>
+                    <div class="col-sm-10">
+                        <input type="text" ng-model="id" value="{{id}}" class="form-control" readonly />
                     </div>
                 </div>
+                <div class="form-group row">
+                    <label for="titulo" class="col-sm-2 col-form-label">Titulo:</label>
+                    <div class="col-sm-10">
+                        <input type="text" ng-model="titulo" class="form-control"
+                            ng-class="{ 'is-invalid' :!userForm.cuerpo.$valid && !userForm.titulo.$pristine}"
+                            name="titulo" ng-required="true" value="{{titulo}}" />
+                        <div class="invalid-feedback" ng-show="userForm.titulo.$invalid">
+                            El titulo no puede estar vacio.
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="cuerpo" class="col-sm-2 col-form-label">Cuerpo:</label>
+                    <div class="col-sm-10">
+                        <div class="form-group">
+                            <textarea class="form-control rounded-0" rows="10" id="exampleFormControlTextarea2" rows="3"
+                                ng-model="cuerpo" class="form-control"
+                                ng-class="{ 'is-invalid' : !userForm.cuerpo.$valid && !userForm.cuerpo.$pristine}"
+                                name="cuerpo" ng-required="true" value="{{cuerpo}}"></textarea>
+                        </div>
+                        <div class="invalid-feedback" ng-show="userForm.cuerpo.$invalid">
+                            El cuerpo no puede estar vacio.
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="etiquetas" class="col-sm-2 col-form-label">Etiquetas:</label>
+                    <div class="col-sm-10">
+                        <input type="text" ng-model="etiquetas" class="form-control"
+                            ng-class="{ 'is-invalid' : !userForm.etiquetas.$valid && !userForm.etiquetas.$pristine}"
+                            name="etiquetas" ng-required="true" value="{{etiquetas}}" />
+                        <div class="invalid-feedback" ng-show="userForm.etiquetas.$error.pattern">
+                            Debe llevar al menos una etiqueta.
+                        </div>
+                    </div>
+                </div>
+
+                <br>
+                <div class="row">
+                    <button type="button" class="btn btn-primary" ng-click="modificar()">Actualizar los datos</button>
+                </div>
             </form>
+            <div ng-show="!fallo&&hecho">
+                <div class="alert alert-success text-center" role="alert">
+                    <h2>El Post se ha actualizado con éxito</h2>
+                    <button class="btn btn-primary" ng-click="cerrar()">Cerrar</button>
+                    <button class="btn btn-primary" ng-click="volver()">Volver</button>
+                </div>
+            </div>
+            <div ng-show="fallo&&hecho">
+                <div class="alert alert-danger text-center" role="alert">
+                    <h2>Ha ocurrido un error al actualizar el Post</h2>
+                    <p ng-show="falloMensaje!=''">{{falloMensaje}}</p>
+                    <button class="btn btn-primary" ng-click="cerrar()">Cerrar</button>
+                    <button class="btn btn-primary" ng-click="volver()">Volver</button>
+                </div>
+            </div>
+            <div ng-show="fallo&&!hecho">
+                <div class="alert alert-danger text-center" role="alert">
+                    <h2>Ha habido un error al recibir datos del Post desde el servidor</h2>
+                    <p ng-show="falloMensaje!=''">{{falloMensaje}}</p>
+                    <button class="btn btn-primary" ng-click="cerrar()">Cerrar</button>
+                    <button class="btn btn-primary" ng-click="volver()">Volver</button>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+<ng-include src="'./app/footer.html'"></ng-include>

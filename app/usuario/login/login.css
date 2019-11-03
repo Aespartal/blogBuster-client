@@ -7,12 +7,12 @@
 }
 
 .login-container{
-background-color: rgb(255, 255, 255);
-width:350px;
-border-top:solid .5rem #F39B53;
-box-sizing: border-box;
-padding:3rem 0;
-box-shadow:0 0 .5rem #8A8C8C;
+    background-color: rgb(255, 255, 255);
+    width:350px;
+    border-top:solid .5rem #316280;
+    box-sizing: border-box;
+    padding:3rem 0;
+    box-shadow:0 0 .5rem #8A8C8C;
 
 }
 
@@ -27,7 +27,7 @@ box-shadow:0 0 .5rem #8A8C8C;
 }
 
 .login-title span{
-    color:#F39B53;
+    color:#316280;
 }
 
 .login-img{
@@ -54,3 +54,4 @@ input[type=text]:focus, [type=password]:focus{
     background-color: #EFEFEF;
 
 }
+
