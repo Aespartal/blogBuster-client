@@ -8,6 +8,9 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
+
+      <section class="container-posts">
+
         <div class="card" ng-repeat="fila in pagina">
             <div class="card-body">
               <h3 class="card-title"><a href="#!/post/view/{{fila.id}}"><span class="font-weight-bold">{{fila.titulo}}</span></a></h3>
@@ -16,12 +19,16 @@
               <h6 class="card-subtitle mb-2 text-muted">{{fila.etiquetas}}</h6>
             </div>
             <div class="card-body">
-              <p><a href="#!/post/view/{{fila.id}}"><i class="material-icons">
-                  insert_comment
-                  </i></a></p>
+              <div class="postfooter">
+                <div class="postmeta clearfix">
+                    <div class="u-floatLeft">
+                        <a href="#!/post/view/{{fila.id}}">Ir al artículo <i class="fa fa-angle-right"></i></a>
+                      </div>       
+                </div>
+              </div>
             </div>
           </div>
-
+        </section>
 
       <nav aria-label="Paginación">
         <ul class="pagination">

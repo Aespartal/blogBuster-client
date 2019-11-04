@@ -1,11 +1,18 @@
 var miControlador = miModulo.controller(
     "postPlistController",
-    ['$scope', '$http', '$routeParams', 'promesasService','auth', function ($scope, $routeParams, promesasService,auth) {
-        if (auth.data.status != 200) {
-            $location.path('/login');
-        }
-        $scope.authStatus = auth.data.status;
-        $scope.authUsername = auth.data.message;
+    ['$scope', '$routeParams', 'promesasService', function ($scope, $routeParams, promesasService) {
+          
+        promesasService.ajaxCheck()
+        .then(function (response) {
+            if(response.data.status=="200"){
+                $scope.session= true;
+                $scope.usuario=response.data.message;
+            } else {
+                $scope.session= false;
+            }
+        }, function (response) {
+            $scope.session= false;
+        })
 
         $scope.paginaActual = parseInt($routeParams.page);
         $scope.rppActual = parseInt($routeParams.rpp);
@@ -27,8 +34,8 @@ var miControlador = miModulo.controller(
                 $scope.calcPage = [];
                 for (const p of $scope.rppS) {
                     const res = $scope.paginaActual / $scope.numPaginas;
-                    const next = Math.ceil($scope.numRegistros / p);
-                    $scope.calcPage.push(Math.round(res * next));
+                    const next = Math.ceil($scope.numRegistros / p);               
+                    $scope.calcPage.push(Math.ceil(res * next));             
                 }
                 paginacion(2);
             }, function () {

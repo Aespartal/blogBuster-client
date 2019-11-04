@@ -1,8 +1,8 @@
 var miControlador = miModulo.controller(
     "usuarioLogoutController",
-    ['$scope', '$http', '$routeParams','$location','promesasService', function ($scope, $http, $routeParams,$location,promesasService) {
+    ['$scope','$location','promesasService', function ($scope,$location,promesasService) {
         $scope.controller="usuarioLogoutController";
-   
+
             promesasService.ajaxLogout()
             .then(function (response){
                 $scope.session= false;
