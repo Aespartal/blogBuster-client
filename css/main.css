@@ -3,6 +3,7 @@ html, body{
     font-family: 'Montserrat', sans-serif;
     height:100%; 
     margin:0;
+    
 }
 .header{
     margin-top:50px;
@@ -48,7 +49,9 @@ html, body{
     from { opacity: 0; }
     to   { opacity: 1; }
 }
-
+.card{
+    float:left!important;
+}
 .card-title>a{
     color:black;
     text-decoration:none;
@@ -133,10 +136,17 @@ box-shadow: 0px 13px 34px 0px #61C2FF;
 .card{
     margin: 10px;
     width: 48%;
-    display: inline-block;
+    float:left;
     transition: all 0.5s ease;
-    
 }
+@media (max-width: 1201px) {
+    .card {
+        margin: 10px auto;
+        width: 100%;
+        
+    }
+  }
+
 .card:hover{
     border:2px solid black;
     -webkit-box-shadow: 0px 13px 34px 0px #61C2FF;
@@ -181,4 +191,10 @@ box-shadow: 0px 13px 34px 0px #61C2FF;
     height: 100%;
     z-index:1200;
     transition: all 1s ease;
+}
+
+.pagination{
+
+    float: left;
+  
 }

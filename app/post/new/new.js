@@ -1,6 +1,13 @@
 var miControlador = miModulo.controller(
     "postNewController",
-    ['$scope', '$http', 'promesasService', function ($scope, $http, promesasService) {
+    ['$scope', '$http', 'promesasService','auth', function ($scope, $http, promesasService, auth) {
+        
+        if (auth.data.status != 200) {
+            $location.path('/login');
+        }
+        $scope.authStatus = auth.data.status;
+        $scope.authUsername = auth.data.message;
+
         $scope.controller = "postNewController";
         $scope.fallo = false;
         $scope.hecho = false;

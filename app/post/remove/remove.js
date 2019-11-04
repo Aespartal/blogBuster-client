@@ -1,6 +1,14 @@
 var miControlador = miModulo.controller(
     "postRemoveController",
-    ['$scope', '$routeParams', '$location', 'promesasService', function ($scope, $routeParams, $location, promesasService) {
+    ['$scope', '$routeParams', '$location', 'promesasService','auth', 
+    function ($scope, $routeParams, $location, promesasService,auth) {
+        
+        if (auth.data.status != 200) {
+            $location.path('/login');
+        }
+        $scope.authStatus = auth.data.status;
+        $scope.authUsername = auth.data.message;
+
 
         $scope.id = $routeParams.id;
         $scope.controller = "postEditController";
@@ -8,17 +16,7 @@ var miControlador = miModulo.controller(
         $scope.hecho = false;
         $scope.falloMensaje = "";
 
-          promesasService.ajaxCheck()
-          .then(function (response) {
-              if(response.data.status==200){
-                  $scope.session= true;
-                  $scope.usuario=response.data.message;
-              } else {
-                  $scope.session= false;
-              }
-          }, function (response) {
-              $scope.session= false;
-          })
+       
 
           promesasService.ajaxGet('post', $routeParams.id)
           .then(function (response) {
