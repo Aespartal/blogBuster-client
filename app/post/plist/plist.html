@@ -27,10 +27,34 @@
                 </nav>
                 <table class="table">
                     <tr>
-                        <th>Id</th>
-                        <th>Título</th>
-                        <th>Cuerpo</th>
-                        <th>Etiquetas</th>
+                        <th>Id<div class="btn-group btn-group-toggle" data-toggle="buttons">
+                            <a href="#!/post/plist/{{ rppActual }}/{{ paginaActual }}/id/asc" class="btn btn-primary btn-sm"
+                              role="button" aria-pressed="true"><i class="fas fa-sort-up"></i></i></a>
+                            <a href="#!/post/plist/{{ rppActual }}/{{ paginaActual }}/id/desc" class="btn btn-primary btn-sm"
+                              role="button" aria-pressed="true"><i class="fas fa-sort-down"></i></i></a>
+                          </div>
+                    </th>
+                        <th>Título<div class="btn-group btn-group-toggle" data-toggle="buttons">
+                            <a href="#!/post/plist/{{ rppActual }}/{{ paginaActual }}/titulo/asc" class="btn btn-primary btn-sm"
+                              role="button" aria-pressed="true"><i class="fas fa-sort-up"></i></i></a>
+                            <a href="#!/post/plist/{{ rppActual }}/{{ paginaActual }}/titulo/desc" class="btn btn-primary btn-sm"
+                              role="button" aria-pressed="true"><i class="fas fa-sort-down"></i></i></a>
+                          </div>
+              </th>
+                        <th>Cuerpo<div class="btn-group btn-group-toggle" data-toggle="buttons">
+                            <a href="#!/post/plist/{{ rppActual }}/{{ paginaActual }}/cuerpo/asc" class="btn btn-primary btn-sm"
+                              role="button" aria-pressed="true"><i class="fas fa-sort-up"></i></i></a>
+                            <a href="#!/post/plist/{{ rppActual }}/{{ paginaActual }}/cuerpo/desc" class="btn btn-primary btn-sm"
+                              role="button" aria-pressed="true"><i class="fas fa-sort-down"></i></i></a>
+                          </div>
+              </th>
+                        <th>Etiquetas<div class="btn-group btn-group-toggle" data-toggle="buttons">
+                            <a href="#!/post/plist/{{ rppActual }}/{{ paginaActual }}/etiquetas/asc" class="btn btn-primary btn-sm"
+                              role="button" aria-pressed="true"><i class="fas fa-sort-up"></i></i></a>
+                            <a href="#!/post/plist/{{ rppActual }}/{{ paginaActual }}/etiquetas/desc" class="btn btn-primary btn-sm"
+                              role="button" aria-pressed="true"><i class="fas fa-sort-down"></i></i></a>
+                          </div>
+              </th>
                         <th>Acciones</th>
                     </tr>
                     <tr ng-repeat="fila in pagina">

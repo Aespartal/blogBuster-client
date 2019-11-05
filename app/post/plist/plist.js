@@ -18,13 +18,25 @@ var miControlador = miModulo.controller(
         $scope.rppActual = parseInt($routeParams.rpp);
         $scope.rppS = [10, 50, 100];
         $scope.controller = "postPlistController";
-        
-        promesasService.ajaxGetPage('post', $scope.rppActual, $scope.paginaActual)
-            .then(function (response) {
+
+            if ($scope.order == null || $scope.colOrder == null) {
+                request = "http://localhost:8081/blogbuster/json?ob=post&op=getpage&page=" + $scope.paginaActual + "&rpp=" + $scope.rppActual;
+            } else {
+                request = "http://localhost:8081/blogbuster/json?ob=post&op=getpage&page=" + $scope.paginaActual + "&rpp=" + $scope.rppActual + "&order=" + $scope.colOrder + "," + $scope.order
+            }
+
+            $http({
+                method: "GET",
+                withCredentials: true,
+                url: request
+            }).then(function (response) {
                 $scope.status = response.data.status;
                 $scope.pagina = response.data.message;
-            }, function () {
-            })
+            });
+    
+            $scope.showSelectValue = function (mySelect) {
+                $window.location.href = `/blogBuster-client/#!/post/plist/`+mySelect+`/1`;
+            }
 
         promesasService.ajaxGetCount('post')
             .then(function (response) {
@@ -38,8 +50,9 @@ var miControlador = miModulo.controller(
                     $scope.calcPage.push(Math.ceil(res * next));             
                 }
                 paginacion(2);
-            }, function () {
             })
+
+           
 
         function paginacion(vecindad) {
             vecindad++;
