@@ -27,6 +27,12 @@ miModulo.factory('promesasService', ['$http',
             },
             ajaxCheck: function () {
                 return $http.get('http://localhost:8081/blogbuster/json?ob=usuario&op=check');
+            },
+            ajaxFill: function (objeto, number) {
+                return $http.get('http://localhost:8081/blogbuster/json?ob=' + objeto + '&op=fill&number=' + number);
+            },
+            ajaxSearch: function (objeto,rpp,page,word) {
+                return $http.get('http://localhost:8081/blogbuster/json?ob='+objeto+'&op=getpage&rpp=' + rpp + '&page=' + page + '&filter='+ word);
             }
         }
     }])

@@ -16,6 +16,7 @@
               <h3 class="card-title"><a href="#!/post/view/{{fila.id}}"><span class="font-weight-bold">{{fila.titulo}}</span></a></h3>
               <hr>
               <p class="card-text">{{fila.cuerpo}}</p>
+              <h6 class="float-right text-muted" ng-show="post.fecha">Fecha: {{post.fecha | stringToDate | date : "dd/MM/yyyy"}}</h6>
               <h6 class="card-subtitle mb-2 text-muted">{{fila.etiquetas}}</h6>
             </div>
             <div class="card-body">

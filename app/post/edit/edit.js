@@ -2,7 +2,7 @@ var miControlador = miModulo.controller(
     "postEditController",
     ['$scope', '$http', '$routeParams', 'promesasService',
     function ($scope, $http, $routeParams, promesasService) {
-
+        
          promesasService.ajaxCheck()
          .then(function (response) {
              if(response.data.status=="200"){
@@ -20,7 +20,7 @@ var miControlador = miModulo.controller(
         $scope.fallo = false;
         $scope.hecho = false;
         $scope.falloMensaje = "";
-
+        $scope.fecha = new Date();
         
 
         promesasService.ajaxGet('post', $routeParams.id)
@@ -29,6 +29,7 @@ var miControlador = miModulo.controller(
                 $scope.titulo = response.data.message.titulo;
                 $scope.cuerpo = response.data.message.cuerpo;
                 $scope.etiquetas = response.data.message.etiquetas;
+                $scope.fecha = moment(response.data.message.fecha, 'DD/MM/YYYY HH:mm').toDate();
             }, function () {
                 $scope.fallo = true;
             })
@@ -39,7 +40,8 @@ var miControlador = miModulo.controller(
                 id: $routeParams.id,
                 titulo: $scope.titulo,
                 cuerpo: $scope.cuerpo,
-                etiquetas: $scope.etiquetas
+                etiquetas: $scope.etiquetas,
+                fecha: $scope.fecha
             }
             var jsonToSend = {
                 data: JSON.stringify(datos)
@@ -73,9 +75,9 @@ var miControlador = miModulo.controller(
                     $scope.titulo = respuesta.titulo;
                     $scope.cuerpo = respuesta.cuerpo;
                     $scope.etiquetas = respuesta.etiquetas;
-                    $scope.fecha = respuesta.fecha;
-                }, function () {
-
+                    $scope.fecha = moment(response.data.message.fecha, 'DD/MM/YYYY HH:mm').toDate();
+                }, function (error) {
+                    $scope.fallo = true;
                 });
         }
 

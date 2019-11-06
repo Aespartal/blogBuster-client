@@ -1,12 +1,23 @@
 var miControlador = miModulo.controller(
     "homeController",
     ['$scope', '$routeParams', '$window', 'promesasService', function ($scope, $routeParams, $window, promesasService) {
-        $scope.paginaActual = parseInt($routeParams.page);
-        $scope.rppActual = 10;
+       
         $scope.controller = "homeController";
         $scope.campo = $routeParams.order;
         $scope.direction = $routeParams.direction;
         
+
+        if (!$routeParams.page) {
+            $scope.paginaActual = 1;
+        } else {
+            $scope.paginaActual = parseInt($routeParams.page);
+        }
+        if (!$routeParams.rpp) {
+            $scope.rppActual = 10;
+        } else {
+            $scope.rppActual = parseInt($routeParams.rpp);
+        }
+
          promesasService.ajaxCheck()
          .then(function (response) {
              if(response.data.status=="200"){

@@ -10,6 +10,24 @@ miModulo.config(['$routeProvider',
                 }
             }
         })
+        $routeProvider.when('/post/plist/:rpp/:page/:colOrder?/:order?', {
+            templateUrl: 'app/post/plist/plist.html',
+            controller: 'postPlistController',
+            resolve: {
+                auth: function (promesasService) {
+                    return promesasService.ajaxCheck();
+                }
+            }
+        })
+        $routeProvider.when('/post/plist/:rpp/:page/:filter', {
+            templateUrl: 'app/post/plist/plist.html',
+            controller: 'postPlistController',
+            resolve: {
+                auth: function (promesasService) {
+                    return promesasService.ajaxCheck();
+                }
+            }
+        })
         $routeProvider.when('/post/remove/:id', {
             templateUrl: 'app/post/remove/remove.html',
             controller: 'postRemoveController',
@@ -68,6 +86,15 @@ miModulo.config(['$routeProvider',
         $routeProvider.when('/logout', {
             templateUrl: 'app/usuario/logout/logout.html',
             controller: 'usuarioLogoutController',
+            resolve: {
+                auth: function (promesasService) {
+                    return promesasService.ajaxCheck();
+                }
+            }
+        });
+        $routeProvider.when('/post/fill', {
+            templateUrl: 'app/post/fill/fill.html',
+            controller: 'postFillController',
             resolve: {
                 auth: function (promesasService) {
                     return promesasService.ajaxCheck();
