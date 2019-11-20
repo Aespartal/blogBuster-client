@@ -11,29 +11,29 @@
       <li class="nav-item" ng-class="{'active':(controller=='homeController')}">
         <a class="nav-link"  href="#!/home/10/1">&#127968; Home</a>
       </li>
-      <li class="nav-item" ng-class="{'active':(controller=='postPlistController')}">
-        <a class="nav-link" ng-class="{'hidden': session==false}" href="#!/post/plist/10/1">Posts</a>
+      <li class="nav-item" ng-show="authStatus==200" ng-class="{'active':(controller=='postPlistController')}">
+        <a class="nav-link" href="#!/post/plist/10/1">Posts</a>
       </li>
-      <li class="nav-item" ng-class="{'active':(controller=='postNewController')}">
-        <a class="nav-link" ng-class="{'hidden': session==false}" href="#!/post/new">Nueva entrada</a>
+      <li class="nav-item" ng-show="authStatus==200" ng-class="{'active':(controller=='postNewController')}">
+        <a class="nav-link" href="#!/post/new">Nueva entrada</a>
       </li>
-      <li class="nav-item" ng-class="{'active':(controller=='postFillController')}">
-        <a class="nav-link"  ng-class="{'hidden': session==false}" href="#!/post/fill">Creación masiva aleatoria de posts</a>
+      <li class="nav-item" ng-show="authStatus==200" ng-class="{'active':(controller=='postFillController')}">
+        <a class="nav-link"  href="#!/post/fill">Creación masiva aleatoria de posts</a>
       </li>
     </ul>
     <div class="conection">
         <ul class="navbar-nav mr-auto">
-      <li class="nav-item" ng-class="{'active': controller=='usuarioLoginController'}">
-        <a class="nav-link"  ng-class="{'hidden': session==true}" href="#!/login">Iniciar Sesión <i
+      <li class="nav-item" ng-show="authStatus!=200" ng-class="{'active': controller=='usuarioLoginController'}">
+        <a class="nav-link" href="#!/login">Iniciar Sesión <i
             class="fas fa-sign-in-alt" ng-class="{'hidden': session==true}"></i></a>
       </li>
-      <li class="nav-item" ng-class="{'active': controller=='usuarioLogoutController'}"></li>
-      <a class="nav-link" ng-class="{'hidden': session==false}"  href="#!/logout"><span class="font-weight-bold">@{{usuario}}</span></a>
+      <li class="nav-item" ng-show="authStatus==200" ng-class="{'active': controller=='usuarioLogoutController'}"></li>
+      <span ng-show="authStatus==200" class="font-weight-bold nav-link">@{{usuario}}</span>
       </li>
 
-      <li class="nav-item" ng-class="{'active': controller=='usuarioLogoutController'}"></li>
-      <a class="nav-link" ng-class="{'hidden': session==false}"  href="#!/logout">Cerrar Sesión <i
-          class="fas fa-sign-out-alt" ng-class="{'hidden': session==false}" ></i></a>
+      <li class="nav-item"  ng-class="{'active': controller=='usuarioLogoutController'}"></li>
+      <a class="nav-link" ng-show="authStatus==200"  href="#!/logout">Cerrar Sesión <i
+          class="fas fa-sign-out-alt"  ></i></a>
       </li>
     </ul>
   </div>

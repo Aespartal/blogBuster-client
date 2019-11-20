@@ -15,7 +15,7 @@
                 ng-class="{ 'is-invalid' : userForm.username.$invalid && !userForm.username.$pristine }" id="Usuario"
                 aria-describedby="Usuario" placeholder="&#128100; username" ng-required="true">
 
-            <div class="invalid-feedback" ng-show="userForm.username.$error.required">
+            <div class="invalid-feedback" ng-show="userForm.username.$touched && userForm.username.$invalid">
                 El nombre de usuario está vacio. Por favor, revisa e inténtalo de nuevo.
             </div>
 
@@ -23,7 +23,7 @@
                 ng-class="{ 'is-invalid' : userForm.password.$invalid && !userForm.password.$pristine }" id="Password"
                 placeholder="&#x1F512; password" ng-required="true">
 
-            <div class="invalid-feedback" ng-show="userForm.password.$error.required">
+            <div class="invalid-feedback" ng-show="userForm.password.$touched && userForm.password.$invalid">
                 La contraseña está vacia. Por favor, revisa e inténtalo de nuevo.
             </div>
             <div class="alert alert-danger" ng-show="fallo" role="alert">

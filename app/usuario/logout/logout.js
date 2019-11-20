@@ -1,8 +1,14 @@
 var miControlador = miModulo.controller(
     "usuarioLogoutController",
-    ['$scope','$location','promesasService', function ($scope,$location,promesasService) {
+    function ($scope,$location,promesasService,auth) {
         $scope.controller="usuarioLogoutController";
-
+        
+        if (auth.data.status != 200) {
+            $location.path('/login');
+        } else {
+            $scope.authStatus = auth.data.status;
+            $scope.usuario = auth.data.message;
+        }
             promesasService.ajaxLogout()
             .then(function (response){
                 $scope.session= false;
@@ -12,5 +18,5 @@ var miControlador = miModulo.controller(
                 $scope.falloMensaje ="No se ha podido cerrar sesion.";
             })
        
-    }]
+    }
 )

@@ -1,19 +1,13 @@
 var miControlador = miModulo.controller(
     "postFillController",
-    ['$scope', '$http', '$routeParams', 'promesasService',
-    function ($scope, $http, $routeParams, promesasService) {
+    function ($scope, $http, $routeParams, promesasService,auth,$location) {
 
-         promesasService.ajaxCheck()
-         .then(function (response) {
-             if(response.data.status=="200"){
-                 $scope.session= true;
-                 $scope.usuario=response.data.message;
-             } else {
-                 $scope.session= false;
-             }
-         }, function (response) {
-             $scope.session= false;
-         })
+        if (auth.data.status != 200) {
+            $location.path('/login');
+        } else {
+            $scope.authStatus = auth.data.status;
+            $scope.usuario = auth.data.message;
+        }
 
        //--
        $scope.controller = "postFillController";
@@ -48,6 +42,6 @@ var miControlador = miModulo.controller(
     };
 
 
-    }]
+    }
 
 )

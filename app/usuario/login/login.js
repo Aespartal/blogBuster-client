@@ -1,6 +1,6 @@
 var miControlador = miModulo.controller(
     "usuarioLoginController",
-    ['$scope','$location', 'promesasService', function ($scope, $location, promesasService) {
+    function ($scope, $location, promesasService,auth) {
         $scope.controller = "usuarioLoginController";
         $scope.usuario ="";
 
@@ -9,17 +9,12 @@ var miControlador = miModulo.controller(
         $scope.falloMensaje = "";
 
 
-        promesasService.ajaxCheck()
-        .then(function (response) {
-            if(response.data.status=="200"){
-                $scope.session= true;
-                $scope.usuario=response.data.message;
-            } else {
-                $scope.session= false;
-            }
-        }, function (response) {
-            $scope.session= false;
-        })
+        if (auth.data.status != 200) {
+            $location.path('/login');
+        } else {
+            $scope.authStatus = auth.data.status;
+            $scope.usuario = auth.data.message;
+        }
 
         $scope.login = function () {
             usuario = $scope.user.username;
@@ -47,5 +42,5 @@ var miControlador = miModulo.controller(
         }
 
 
-    }]
+    }
 )
